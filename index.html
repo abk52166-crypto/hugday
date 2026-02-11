@@ -9,7 +9,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background: #ffe5ec; /* Soft pink hug vibe */
+            background: #ffe5ec; 
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -20,117 +20,130 @@
             padding: 20px;
         }
 
-        .header { text-align: center; margin-bottom: 20px; z-index: 10; }
+        .header { text-align: center; margin-bottom: 30px; z-index: 10; }
         .header h1 { 
             font-family: 'Dancing Script', cursive; 
             color: #fb6f92; 
-            font-size: 2.5rem; 
+            font-size: 3rem; 
         }
 
-        /* The Music Player Look */
-        .player-container {
+        .player-card {
             background: white;
             width: 100%;
             max-width: 320px;
-            padding: 30px;
-            border-radius: 40px;
-            box-shadow: 0 15px 35px rgba(251, 111, 146, 0.3);
+            padding: 40px 20px;
+            border-radius: 50px;
+            box-shadow: 0 20px 40px rgba(251, 111, 146, 0.2);
             text-align: center;
             z-index: 5;
+            border: 2px solid #ffb3c1;
         }
 
-        .album-art {
+        .vinyl-record {
             width: 180px;
             height: 180px;
+            background: radial-gradient(circle, #333 30%, #111 100%);
             border-radius: 50%;
-            object-fit: cover;
-            border: 8px solid #ffb3c1;
-            margin-bottom: 20px;
-            animation: pulse-hug 2s infinite ease-in-out;
+            margin: 0 auto 30px;
+            position: relative;
+            border: 10px solid #fb6f92;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            animation: spin 5s linear infinite;
         }
 
-        @keyframes pulse-hug {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 0 rgba(251, 111, 146, 0.4); }
-            50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(251, 111, 146, 0.6); }
-        }
-
-        .song-title {
+        .vinyl-record::after {
+            content: "♥";
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
             color: #fb6f92;
-            font-weight: 700;
-            font-size: 1.2rem;
+            font-size: 40px;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .song-info h2 {
+            color: #fb6f92;
+            font-size: 1.4rem;
             margin-bottom: 5px;
         }
 
-        .artist {
+        .song-info p {
             color: #ffb3c1;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
+            font-weight: 600;
+            margin-bottom: 25px;
         }
 
-        /* YouTube Embed Styling */
-        .audio-wrapper {
-            margin-top: 10px;
-            border-radius: 15px;
-            overflow: hidden;
-            height: 60px; /* Hides the video part, shows controls */
-        }
-
-        .message-hug {
-            margin-top: 25px;
-            font-size: 0.9rem;
+        .hug-text {
             color: #555;
+            font-size: 1rem;
             line-height: 1.6;
             font-style: italic;
+            padding: 0 10px;
+            margin-top: 20px;
+            border-top: 1px solid #ffe5ec;
+            padding-top: 20px;
         }
 
-        /* Floating Hugs (Hearts) */
-        .floating-hug {
+        .audio-wrapper {
+            border-radius: 20px;
+            overflow: hidden;
+            height: 80px;
+            background: #fff0f3;
+        }
+
+        .heart-float {
             position: absolute;
-            color: #ffb3c1;
-            font-size: 25px;
+            color: #fb6f92;
+            font-size: 20px;
             pointer-events: none;
-            animation: float-up 4s linear infinite;
+            animation: floatUp 4s linear infinite;
+            opacity: 0.6;
         }
 
-        @keyframes float-up {
-            from { transform: translateY(110vh) rotate(0deg); opacity: 1; }
-            to { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        @keyframes floatUp {
+            from { transform: translateY(110vh) scale(1); opacity: 1; }
+            to { transform: translateY(-10vh) scale(1.5); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <h1>Happy Hug Day</h1>
+        <h1>Hug Day, Manaar</h1>
     </div>
 
-    <div class="player-container">
-        <img src="pic1.jpg" alt="Manaar" class="album-art">
+    <div class="player-card">
+        <div class="vinyl-record"></div>
         
-        <div class="song-title">Tera Hone Laga Hoon</div>
-        <div class="artist">For my Lovely Manaar</div>
-
-        <div class="audio-wrapper">
-            <iframe width="100%" height="100" src="https://www.youtube.com/embed/fT_n4E8G29M?autoplay=0&controls=1" frameborder="0" allow="autoplay"></iframe>
+        <div class="song-info">
+            <h2>Tera Hone Laga Hoon</h2>
+            <p>Dedicated by Momo</p>
         </div>
 
-        <div class="message-hug">
-            "If i could jump through this screen and keep you in between my arms, I would even let go my love. Close those beautiful eyes, play the song my love, and imagine me being right there with you."
+        <div class="audio-wrapper">
+            <iframe width="100%" height="100" src="https://www.youtube.com/embed/fT_n4E8G29M?controls=1" frameborder="0" allow="autoplay"></iframe>
+        </div>
+
+        <div class="hug-text">
+            "If i could jump through this screen and keep you in between my arms, I would never let go my love. Close those beautiful eyes, play the song my love, and imagine me being right there with you."
         </div>
     </div>
 
     <script>
-        // Floating Hearts Background
         function createHeart() {
             const h = document.createElement('div');
-            h.className = 'floating-hug';
-            h.innerHTML = '❤';
+            h.className = 'heart-float';
+            h.innerHTML = '♥';
             h.style.left = Math.random() * 100 + 'vw';
             h.style.animationDuration = (Math.random() * 2 + 3) + 's';
             document.body.appendChild(h);
             setTimeout(() => h.remove(), 4000);
         }
-        setInterval(createHeart, 300);
+        setInterval(createHeart, 400);
     </script>
 </body>
 </html>
