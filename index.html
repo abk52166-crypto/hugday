@@ -6,10 +6,10 @@
     <title>Hug Day - Manaar</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%);
+            background: #0a0a0a;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -20,53 +20,54 @@
             padding: 20px;
         }
 
-        /* Glassmorphism Player */
+        /* Pulsing Aura */
+        .aura {
+            position: absolute;
+            width: 300px; height: 300px;
+            background: rgba(251, 111, 146, 0.2);
+            filter: blur(60px);
+            border-radius: 50%;
+            animation: pulse-aura 4s infinite alternate;
+            z-index: 1;
+        }
+
+        @keyframes pulse-aura {
+            from { transform: scale(1); opacity: 0.4; }
+            to { transform: scale(1.4); opacity: 0.7; }
+        }
+
         .player-card {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             width: 100%;
             max-width: 340px;
-            padding: 40px 20px;
+            padding: 40px 25px;
             border-radius: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
             z-index: 10;
         }
 
-        /* Vinyl Animation */
-        .vinyl-container {
-            position: relative;
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 30px;
-        }
-
         .vinyl-record {
-            width: 100%;
-            height: 100%;
+            width: 160px; height: 160px;
             background: radial-gradient(circle, #222 30%, #000 100%);
             border-radius: 50%;
-            border: 8px solid #333;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            animation: spin 6s linear infinite;
+            margin: 0 auto 30px;
+            position: relative;
+            border: 4px solid #333;
+            box-shadow: 0 0 30px rgba(251, 111, 146, 0.4);
+            animation: spin 8s linear infinite;
         }
 
         .vinyl-center {
-            width: 70px;
-            height: 70px;
+            width: 50px; height: 50px;
             background: #fb6f92;
             border-radius: 50%;
-            border: 4px solid #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            border: 3px solid #fff;
         }
 
         @keyframes spin {
@@ -76,81 +77,72 @@
 
         .song-info h2 {
             color: #fff;
-            font-size: 1.5rem;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-size: 1.4rem;
             margin-bottom: 5px;
         }
 
         .song-info p {
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-bottom: 25px;
+            color: #fb6f92;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
-        /* Fixed Video Container - This ensures the player appears */
-        .video-container {
+        /* Custom Audio Player Styling */
+        audio {
             width: 100%;
-            height: 120px;
-            border-radius: 20px;
-            overflow: hidden;
-            background: rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            height: 40px;
+            margin-bottom: 25px;
+            filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+            opacity: 0.8;
         }
 
         .hug-text {
-            color: #fff;
-            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
             line-height: 1.6;
             font-style: italic;
-            padding: 15px;
-            background: rgba(251, 111, 146, 0.2);
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
             border-radius: 20px;
-            margin-top: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* Floating Hug Bubbles */
-        .bubble {
+        .particle {
             position: absolute;
-            background: rgba(255, 255, 255, 0.3);
+            background: white;
             border-radius: 50%;
             pointer-events: none;
-            animation: floatUp 5s linear infinite;
+            animation: float 5s linear infinite;
         }
 
-        @keyframes floatUp {
-            0% { transform: translateY(110vh) scale(0.5); opacity: 0; }
-            50% { opacity: 1; }
-            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        @keyframes float {
+            0% { transform: translateY(110vh) scale(0); opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-    <div id="bubbles"></div>
+    <div class="aura"></div>
+    <div id="particles"></div>
 
     <div class="player-card">
-        <div class="vinyl-container">
-            <div class="vinyl-record">
-                <div class="vinyl-center">♥</div>
-            </div>
+        <div class="vinyl-record">
+            <div class="vinyl-center"></div>
         </div>
         
         <div class="song-info">
             <h2>Tera Hone Laga Hoon</h2>
-            <p>From Momo to Manaar</p>
+            <p>Dedicated by Momo</p>
         </div>
 
-        <div class="video-container">
-            <iframe width="100%" height="100%" 
-                src="https://www.youtube.com/embed/fT_n4E8G29M?controls=1&modestbranding=1&rel=0" 
-                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-            </iframe>
-        </div>
+        <audio controls>
+            <source src="song.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
 
         <div class="hug-text">
             "If i could jump through this screen and keep you in between my arms, I would never let go my love. Close those beautiful eyes, play the song my love, and imagine me being right there with you."
@@ -158,19 +150,17 @@
     </div>
 
     <script>
-        // Create soft floating bubbles for a "warm" hug feeling
-        function createBubble() {
-            const b = document.createElement('div');
-            b.className = 'bubble';
-            const size = Math.random() * 40 + 10 + 'px';
-            b.style.width = size;
-            b.style.height = size;
-            b.style.left = Math.random() * 100 + 'vw';
-            b.style.animationDuration = (Math.random() * 3 + 4) + 's';
-            document.getElementById('bubbles').appendChild(b);
-            setTimeout(() => b.remove(), 6000);
+        function createParticle() {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            const size = Math.random() * 4 + 'px';
+            p.style.width = size; p.style.height = size;
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            document.getElementById('particles').appendChild(p);
+            setTimeout(() => p.remove(), 5000);
         }
-        setInterval(createBubble, 500);
+        setInterval(createParticle, 400);
     </script>
 </body>
 </html>
