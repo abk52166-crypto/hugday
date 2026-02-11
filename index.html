@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Hug Day - Manaar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #ffe5ec; /* Soft pink hug vibe */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: 'Quicksand', sans-serif;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .header { text-align: center; margin-bottom: 20px; z-index: 10; }
+        .header h1 { 
+            font-family: 'Dancing Script', cursive; 
+            color: #fb6f92; 
+            font-size: 2.5rem; 
+        }
+
+        /* The Music Player Look */
+        .player-container {
+            background: white;
+            width: 100%;
+            max-width: 320px;
+            padding: 30px;
+            border-radius: 40px;
+            box-shadow: 0 15px 35px rgba(251, 111, 146, 0.3);
+            text-align: center;
+            z-index: 5;
+        }
+
+        .album-art {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid #ffb3c1;
+            margin-bottom: 20px;
+            animation: pulse-hug 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse-hug {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 rgba(251, 111, 146, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(251, 111, 146, 0.6); }
+        }
+
+        .song-title {
+            color: #fb6f92;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .artist {
+            color: #ffb3c1;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        /* YouTube Embed Styling */
+        .audio-wrapper {
+            margin-top: 10px;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 60px; /* Hides the video part, shows controls */
+        }
+
+        .message-hug {
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        /* Floating Hugs (Hearts) */
+        .floating-hug {
+            position: absolute;
+            color: #ffb3c1;
+            font-size: 25px;
+            pointer-events: none;
+            animation: float-up 4s linear infinite;
+        }
+
+        @keyframes float-up {
+            from { transform: translateY(110vh) rotate(0deg); opacity: 1; }
+            to { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Happy Hug Day</h1>
+    </div>
+
+    <div class="player-container">
+        <img src="pic1.jpg" alt="Manaar" class="album-art">
+        
+        <div class="song-title">Tera Hone Laga Hoon</div>
+        <div class="artist">For my Lovely Manaar</div>
+
+        <div class="audio-wrapper">
+            <iframe width="100%" height="100" src="https://www.youtube.com/embed/fT_n4E8G29M?autoplay=0&controls=1" frameborder="0" allow="autoplay"></iframe>
+        </div>
+
+        <div class="message-hug">
+            "If i could jump through this screen and keep you in between my arms, I would even let go my love. Close those beautiful eyes, play the song my love, and imagine me being right there with you."
+        </div>
+    </div>
+
+    <script>
+        // Floating Hearts Background
+        function createHeart() {
+            const h = document.createElement('div');
+            h.className = 'floating-hug';
+            h.innerHTML = '❤';
+            h.style.left = Math.random() * 100 + 'vw';
+            h.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 4000);
+        }
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>
